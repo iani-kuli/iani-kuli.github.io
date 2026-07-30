@@ -32,6 +32,11 @@
   "jobTitle": "AI Researcher",
   "email": "mailto:kulichenkoiana@gmail.com",
   "worksFor": { "@type": "Organization", "name": "Fusionbrain Lab" },
+  "affiliation": {
+    "@type": "Organization",
+    "name": "Fiber Pipe",
+    "url": "https://fiberpipe.tech/en/"
+  },
   "knowsAbout": [
     "Generative models",
     "Multi-agent systems",
@@ -60,8 +65,9 @@
   <nav class="nav__links" aria-label="Sections">
     <a href="#focus">Focus</a>
     <a href="#projects">Projects</a>
-    <a href="#publication">Publication</a>
+    <a href="#publications">Publications</a>
     <a href="#patents">Patents</a>
+    <a href="#talks">Talks</a>
     <a href="#background">Background</a>
   </nav>
   <a class="btn btn--small" href="mailto:kulichenkoiana@gmail.com">Get in touch</a>
@@ -80,7 +86,8 @@
       </p>
       <p class="sub">
         PhD candidate in Computational and Data Science and Engineering at an AI research
-        institute.
+        institute. Co-founder of
+        <a class="ilink" href="https://fiberpipe.tech/en/" rel="noopener">Fiber Pipe</a>.
       </p>
       <div class="hero__actions">
         <a class="btn" href="mailto:kulichenkoiana@gmail.com">Get in touch</a>
@@ -210,25 +217,81 @@
     </div>
   </section>
 
-  <section id="publication" class="section reveal">
-    <h2 class="section__title"><span class="idx">03</span>Publication</h2>
-    <article class="paper">
-      <p class="paper__venue">IEEE Sensors Letters, July 2025</p>
-      <h3>Machine Learning-Driven Compensation for Non-Ideal Channels in AWG-Based FBG Interrogator</h3>
-      <p class="paper__authors">
-        I. A. Kazakov, <b>I. V. Kulichenko</b>, E. E. Kovalev, A. A. Treskova, D. D. Barma,
-        K. M. Malakhov, I. V. Oseledets, A. V. Shipulin
-      </p>
-      <p>
-        An exponential-regression calibration of a photonic integrated AWG interrogator reaches
-        3.17 pm RMSE against 7.11 pm for the segmented analytical model, and holds accuracy
-        below 5 pm across an extended 2.9 nm span without refitting.
-      </p>
-      <div class="paper__links">
-        <a class="btn btn--ghost btn--small" href="https://doi.org/10.1109/LSENS.2025.3585057" rel="noopener">DOI 10.1109/LSENS.2025.3585057</a>
-        <a class="btn btn--ghost btn--small" href="https://arxiv.org/abs/2506.13575" rel="noopener">arXiv 2506.13575</a>
-      </div>
-    </article>
+  <section id="publications" class="section reveal">
+    <h2 class="section__title"><span class="idx">03</span>Publications</h2>
+    <div class="stack">
+
+      <article class="paper">
+        <p class="paper__venue">IEEE Sensors Letters, 2025</p>
+        <h3>Machine Learning-Driven Compensation for Non-Ideal Channels in AWG-Based FBG Interrogator</h3>
+        <p class="paper__authors">
+          I. A. Kazakov, <b>I. V. Kulichenko</b>, E. E. Kovalev, A. A. Treskova, D. D. Barma,
+          K. M. Malakhov, I. V. Oseledets, A. V. Shipulin
+        </p>
+        <p>
+          An exponential-regression calibration of a photonic integrated AWG interrogator reaches
+          3.17 pm RMSE against 7.11 pm for the segmented analytical model, and holds accuracy
+          below 5 pm across an extended 2.9 nm span without refitting.
+        </p>
+        <div class="paper__links">
+          <a class="btn btn--ghost btn--small" href="https://doi.org/10.1109/LSENS.2025.3585057" rel="noopener">DOI 10.1109/LSENS.2025.3585057</a>
+          <a class="btn btn--ghost btn--small" href="https://ieeexplore.ieee.org/document/11072673" rel="noopener">IEEE Xplore</a>
+          <a class="btn btn--ghost btn--small" href="https://arxiv.org/abs/2506.13575" rel="noopener">arXiv 2506.13575</a>
+        </div>
+      </article>
+
+      <article class="paper">
+        <p class="paper__venue">Neurocomputers: Development, Application, No. 5, 2023</p>
+        <h3>Generative image models for augmenting the training data of a face detector</h3>
+        <p class="paper__authors">N. A. Andriyanov, <b>Ia. V. Kulichenko</b></p>
+        <p>
+          Synthetic faces produced by generative models are added to the training set of a face
+          detector to cover poses and lighting the collected data misses.
+        </p>
+        <p class="paper__ru" lang="ru">Применение генеративных моделей изображений для
+        аугментирования данных обучения детектора лиц. Н. А. Андриянов, Я. В. Куличенко.
+        Журнал «Нейрокомпьютеры: разработка, применение», издательство «Радиотехника».</p>
+        <div class="paper__links">
+          <a class="btn btn--ghost btn--small" href="http://radiotec.ru/ru/journal/Neurocomputers/number/2023-5/article/23718" rel="noopener">radiotec.ru</a>
+          <span class="pill">Listed by the Higher Attestation Commission</span>
+        </div>
+      </article>
+
+      <article class="paper">
+        <p class="paper__venue">Popov Society for Radio Engineering, Electronics and Communications, 2023</p>
+        <h3>A study of metric algorithms for face recognition</h3>
+        <p class="paper__authors">
+          <b>Ia. V. Kulichenko</b>, D. S. Utkin, A. C. Fan, N. I. Matuskov, I. M. Lopatkin,
+          N. A. Andriyanov
+        </p>
+        <p>
+          Comparison of metric learning approaches on the face recognition task, measured by
+          identification accuracy across embedding distances.
+        </p>
+        <p class="paper__ru" lang="ru">Исследование метрических алгоритмов в задаче распознавания
+        лиц. Куличенко Я. В., Уткин Д. С., Фан А. Ч., Матусков Н. И., Лопаткин И. М.,
+        Андриянов Н. А.</p>
+        <div class="paper__links">
+          <a class="btn btn--ghost btn--small" href="https://www.elibrary.ru/item.asp?id=54752247" rel="noopener">eLIBRARY</a>
+        </div>
+      </article>
+
+      <article class="paper">
+        <p class="paper__venue">Popov Society for Radio Engineering, Electronics and Communications, 2023</p>
+        <h3>Faster face detection and identification through a motion detector</h3>
+        <p class="paper__authors">D. S. Utkin, <b>Ia. V. Kulichenko</b>, N. A. Andriyanov</p>
+        <p>
+          A motion detector gates which frames reach the recognition stage, cutting the work the
+          face pipeline has to do on static video.
+        </p>
+        <p class="paper__ru" lang="ru">Повышение скорости детекции и идентификации лиц на основе
+        детектора движения. Уткин Д. С., Куличенко Я. В., Андриянов Н. А.</p>
+        <div class="paper__links">
+          <a class="btn btn--ghost btn--small" href="https://www.elibrary.ru/item.asp?id=54752250" rel="noopener">eLIBRARY</a>
+        </div>
+      </article>
+
+    </div>
   </section>
 
   <section id="patents" class="section reveal">
@@ -270,8 +333,49 @@
     </div>
   </section>
 
+  <section id="talks" class="section reveal">
+    <h2 class="section__title"><span class="idx">05</span>Talks</h2>
+    <div class="stack stack--tight">
+
+      <article class="talk">
+        <span class="talk__when">13 to 17 October 2025</span>
+        <div>
+          <h3>Generative AI agents</h3>
+          <p>Gitex Global 2025, Dubai World Trade Centre.
+          <a href="https://www.gitex.com/" rel="noopener">gitex.com</a></p>
+        </div>
+      </article>
+
+      <article class="talk">
+        <span class="talk__when">19 to 22 October 2025</span>
+        <div>
+          <h3>Machine Learning-Driven Compensation for Non-Ideal Channels in AWG-Based FBG Interrogator</h3>
+          <p>IEEE SENSORS 2025, Vancouver, Canada. Presented online.
+          <a href="https://2025.ieee-sensorsconference.org/" rel="noopener">ieee-sensorsconference.org</a></p>
+        </div>
+      </article>
+
+      <article class="talk">
+        <span class="talk__when">13 to 24 March 2023</span>
+        <div>
+          <h3>State of the Art YOLO Model in Object Recognition Tasks</h3>
+          <p>XIV International Scientific Student Congress, Moscow. Second place in the competition.</p>
+        </div>
+      </article>
+
+      <article class="talk">
+        <span class="talk__when">18 April 2023</span>
+        <div>
+          <h3>Modern Text-to-Image Generation Technologies</h3>
+          <p>International Scientific and Practical Conference of Students and Postgraduates, Moscow.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
   <section id="background" class="section reveal">
-    <h2 class="section__title"><span class="idx">05</span>Background</h2>
+    <h2 class="section__title"><span class="idx">06</span>Background</h2>
 
     <div class="grid grid--two">
       <div>
@@ -291,9 +395,10 @@
           </li>
           <li>
             <span class="when">2023 to now</span>
-            <b>Co-founder, Arctic pipeline monitoring venture</b>
-            <span>Computer vision and fiber-optic sensing. First place at the EnergyTechnoHub
-            incubator in Saint Petersburg, winner of the Triple Point pitch competitions.</span>
+            <b>Co-founder, <a class="ilink" href="https://fiberpipe.tech/en/" rel="noopener">Fiber Pipe</a></b>
+            <span>Pipeline monitoring in the Arctic through computer vision and fiber-optic
+            sensing. First place at the EnergyTechnoHub incubator in Saint Petersburg, winner
+            of the Triple Point pitch competitions.</span>
           </li>
         </ul>
       </div>
