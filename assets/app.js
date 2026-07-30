@@ -14,6 +14,16 @@
   } else {
     var pending = revealables.slice();
 
+    /* Stagger index for the cascade. Capped so a ten-card section still
+       finishes inside half a second. */
+    var STAGGER_SEL = '.card,.proj,.paper,.talk,.ip,.timeline li,.contrib';
+    revealables.forEach(function (root) {
+      var kids = root.querySelectorAll(STAGGER_SEL);
+      for (var i = 0; i < kids.length; i++) {
+        kids[i].style.setProperty('--i', Math.min(i, 8));
+      }
+    });
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) show(e.target);

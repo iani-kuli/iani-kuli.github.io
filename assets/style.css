@@ -125,6 +125,30 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .btn svg{width:16px;height:16px;flex:0 0 auto}
 .btn--big svg{width:18px;height:18px}
 
+/* the destination of a link, shown instead of leaving it to the status bar */
+.btn[data-link]{position:relative}
+.btn[data-link]::after,.btn[data-link]::before{
+  opacity:0;pointer-events:none;z-index:30;
+  transition:opacity .18s var(--ease),transform .18s var(--ease);
+}
+.btn[data-link]::after{
+  content:attr(data-link);
+  position:absolute;top:calc(100% + 10px);left:50%;
+  transform:translate(-50%,4px);
+  padding:6px 11px;border:1px solid var(--rule-hi);border-radius:8px;
+  background:var(--surface-hi);color:var(--paper-2);
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:0;
+  white-space:nowrap;
+}
+.btn[data-link]::before{
+  content:"";position:absolute;top:calc(100% + 6px);left:50%;width:7px;height:7px;
+  transform:translate(-50%,4px) rotate(45deg);
+  background:var(--surface-hi);
+  border-left:1px solid var(--rule-hi);border-top:1px solid var(--rule-hi);
+}
+.btn[data-link]:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+.btn[data-link]:focus-visible::before{opacity:1;transform:translate(-50%,0) rotate(45deg)}
+
 /* ------------------------------------------------------------------- hero */
 .hero{
   max-width:var(--wrap);margin:0 auto;
@@ -145,11 +169,22 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .hero__actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
 
 .hero__portrait{display:flex;justify-content:center}
-.portrait{position:relative;width:min(310px,70vw);aspect-ratio:1}
+.portrait{
+  position:relative;width:min(310px,70vw);aspect-ratio:1;
+  border:1px solid var(--rule-hi);border-radius:16px;overflow:hidden;
+  background:var(--surface);
+  transition:border-color .3s var(--ease),box-shadow .35s var(--ease);
+}
 .portrait img{
-  width:100%;height:100%;border-radius:14px;object-fit:cover;
-  border:1px solid var(--rule-hi);background:var(--surface);
+  width:100%;height:100%;border:0;border-radius:0;object-fit:cover;
   filter:saturate(.92) contrast(1.02);
+  transition:transform .5s var(--ease),filter .4s var(--ease);
+}
+.portrait::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.10) 50%,transparent 62%);
+  transform:translateX(-120%);
+  transition:transform .8s var(--ease);
 }
 
 /* ----------------------------------------------------------------- ribbon */
@@ -349,22 +384,31 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   .chips span:hover{border-color:var(--signal);color:var(--paper)}
   .foot a:hover{color:var(--signal)}
   .ilink:hover{border-bottom-color:var(--signal)}
+  .btn:hover{box-shadow:0 8px 24px rgba(76,224,165,.18)}
+  .btn--ghost:hover{box-shadow:0 8px 24px rgba(0,0,0,.35)}
+  .btn[data-link]:hover::after{opacity:1;transform:translate(-50%,0)}
+  .btn[data-link]:hover::before{opacity:1;transform:translate(-50%,0) rotate(45deg)}
+  .portrait:hover{border-color:rgba(76,224,165,.5);box-shadow:0 22px 60px rgba(76,224,165,.14)}
+  .portrait:hover img{transform:scale(1.05);filter:saturate(1) contrast(1.05)}
+  .portrait:hover::after{transform:translateX(120%)}
 }
 
 /* ----------------------------------------------------------------- reveal */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
 .reveal.is-in{opacity:1;transform:none}
-.reveal .card,.reveal .proj,.reveal .talk,.reveal .ip{
-  opacity:0;transform:translateY(10px);
-  transition:opacity .42s var(--ease),transform .42s var(--ease),
+/* Cards rise one after another. The index comes from app.js as --i, so the
+   cascade keeps running past the third card in long lists. */
+.reveal .card,.reveal .proj,.reveal .talk,.reveal .ip,
+.reveal .paper,.reveal .timeline li,.reveal .contrib{
+  opacity:0;transform:translateY(18px) scale(.985);filter:blur(4px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease),filter .5s var(--ease),
              border-color .2s var(--ease),background .2s var(--ease);
+  transition-delay:calc(var(--i,0) * 55ms);
 }
-.reveal.is-in .card,.reveal.is-in .proj,.reveal.is-in .talk,.reveal.is-in .ip{opacity:1;transform:none}
-.reveal.is-in .card:nth-child(2),.reveal.is-in .proj:nth-child(2),
-.reveal.is-in .talk:nth-child(2),.reveal.is-in .ip:nth-child(2){transition-delay:.05s}
-.reveal.is-in .card:nth-child(3),.reveal.is-in .proj:nth-child(3),
-.reveal.is-in .talk:nth-child(3),.reveal.is-in .ip:nth-child(3){transition-delay:.1s}
-.reveal.is-in .proj:nth-child(n+4),.reveal.is-in .talk:nth-child(n+4){transition-delay:.15s}
+.reveal.is-in .card,.reveal.is-in .proj,.reveal.is-in .talk,.reveal.is-in .ip,
+.reveal.is-in .paper,.reveal.is-in .timeline li,.reveal.is-in .contrib{
+  opacity:1;transform:none;filter:none;
+}
 
 /* ------------------------------------------------------------ breakpoints */
 @media (max-width:880px){
@@ -384,7 +428,8 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important}
-  .reveal,.reveal .card,.reveal .proj,.reveal .talk,.reveal .ip{opacity:1;transform:none}
+  .reveal,.reveal .card,.reveal .proj,.reveal .talk,.reveal .ip,
+  .reveal .paper,.reveal .timeline li,.reveal .contrib{opacity:1;transform:none;filter:none}
 }
 
 /* GitHub activity ------------------------------------------------------- */
