@@ -1,0 +1,183 @@
+/* Generative node field + scroll reveal.
+   Kept deliberately cheap: the field pauses when the tab is hidden or when the
+   viewport has scrolled past it, and it never runs under prefers-reduced-motion. */
+(function () {
+  'use strict';
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- scroll reveal ---------- */
+  var revealables = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    revealables.forEach(function (el) { el.classList.add('is-in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealables.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---------- generative field ---------- */
+  var canvas = document.getElementById('field');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d', { alpha: true });
+  if (!ctx) return;
+
+  var STOPS = [[45, 212, 191], [96, 165, 250], [167, 139, 250]];
+  var LINK_DIST = 168;
+  var nodes = [];
+  var w = 0, h = 0, dpr = 1;
+  var pointer = { x: -9999, y: -9999, active: false };
+  var running = false;
+  var rafId = 0;
+
+  function mix(t) {
+    t = Math.max(0, Math.min(1, t)) * (STOPS.length - 1);
+    var i = Math.min(Math.floor(t), STOPS.length - 2);
+    var f = t - i, a = STOPS[i], b = STOPS[i + 1];
+    return [
+      Math.round(a[0] + (b[0] - a[0]) * f),
+      Math.round(a[1] + (b[1] - a[1]) * f),
+      Math.round(a[2] + (b[2] - a[2]) * f)
+    ];
+  }
+
+  function build() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var target = Math.round((w * h) / 26000);
+    var count = Math.max(22, Math.min(target, 72));
+    nodes = [];
+    for (var i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: (Math.random() - 0.5) * 0.22,
+        r: 1.3 + Math.random() * 1.9
+      });
+    }
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, w, h);
+
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < -30) n.x = w + 30;
+      if (n.x > w + 30) n.x = -30;
+      if (n.y < -30) n.y = h + 30;
+      if (n.y > h + 30) n.y = -30;
+
+      if (pointer.active) {
+        var pdx = pointer.x - n.x, pdy = pointer.y - n.y;
+        var pd2 = pdx * pdx + pdy * pdy;
+        if (pd2 < 34000 && pd2 > 1) {
+          var pull = 0.00016 * (34000 - pd2) / 34000;
+          n.vx += pdx * pull;
+          n.vy += pdy * pull;
+        }
+      }
+      var sp = Math.hypot(n.vx, n.vy);
+      if (sp > 0.55) { n.vx *= 0.55 / sp; n.vy *= 0.55 / sp; }
+    }
+
+    for (var a = 0; a < nodes.length; a++) {
+      for (var b = a + 1; b < nodes.length; b++) {
+        var p = nodes[a], q = nodes[b];
+        var dx = p.x - q.x, dy = p.y - q.y;
+        var d = Math.hypot(dx, dy);
+        if (d > LINK_DIST) continue;
+        var c = mix(((p.x + q.x) / 2) / w);
+        ctx.strokeStyle = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' +
+          (0.2 * (1 - d / LINK_DIST)).toFixed(3) + ')';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(q.x, q.y);
+        ctx.stroke();
+      }
+    }
+
+    for (var k = 0; k < nodes.length; k++) {
+      var m = nodes[k];
+      var col = mix(m.x / w);
+      ctx.fillStyle = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',0.62)';
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    rafId = window.requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (running || reduced) return;
+    running = true;
+    rafId = window.requestAnimationFrame(frame);
+  }
+
+  function stop() {
+    if (!running) return;
+    running = false;
+    window.cancelAnimationFrame(rafId);
+  }
+
+  function shouldRun() {
+    return !document.hidden && window.scrollY < window.innerHeight * 1.4;
+  }
+
+  function sync() {
+    if (shouldRun()) start(); else stop();
+  }
+
+  var resizeTimer = 0;
+  window.addEventListener('resize', function () {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(function () {
+      build();
+      if (reduced) frameOnce();
+    }, 180);
+  });
+
+  window.addEventListener('scroll', sync, { passive: true });
+  document.addEventListener('visibilitychange', sync);
+
+  window.addEventListener('pointermove', function (e) {
+    pointer.x = e.clientX;
+    pointer.y = e.clientY;
+    pointer.active = true;
+  }, { passive: true });
+  window.addEventListener('pointerleave', function () { pointer.active = false; });
+
+  function frameOnce() {
+    var keep = rafId;
+    ctx.clearRect(0, 0, w, h);
+    for (var k = 0; k < nodes.length; k++) {
+      var m = nodes[k];
+      var col = mix(m.x / w);
+      ctx.fillStyle = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',0.5)';
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    rafId = keep;
+  }
+
+  build();
+  if (reduced) frameOnce(); else sync();
+})();
