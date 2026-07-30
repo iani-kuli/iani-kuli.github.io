@@ -84,7 +84,7 @@
   var ctx = canvas.getContext('2d', { alpha: true });
   if (!ctx) return;
 
-  var STOPS = [[255, 138, 61], [255, 168, 108], [255, 198, 154]];
+  var STOPS = [[76, 224, 165], [123, 235, 192], [168, 244, 215]];
   var LINK_DIST = 168;
   var nodes = [];
   var w = 0, h = 0, dpr = 1;
