@@ -330,7 +330,12 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 }
 .foot__alt{margin-left:9px;opacity:.75}
 .foot__links{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.foot__links a{display:inline-flex;align-items:center;gap:6px}
+.foot__links a{display:inline-flex;align-items:center;gap:6px;min-height:32px}
+@media (max-width:520px){
+  .foot{gap:6px}
+  .foot__links{gap:10px}
+  .foot__links a{min-height:36px;padding:2px 0}
+}
 .foot__links svg{width:14px;height:14px;flex:0 0 auto}
 
 /* ------------------------------------------------------------ hover layer */
