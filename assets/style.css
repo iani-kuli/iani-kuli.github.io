@@ -126,7 +126,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
              color .18s var(--ease),transform .12s var(--ease);
 }
 .btn--ghost{background:transparent;color:var(--paper);border-color:var(--rule-hi)}
-.btn--small{padding:8px 15px;font-size:13.5px;border-radius:8px}
+.btn--small{padding:8px 15px;font-size:13.5px;border-radius:8px;min-height:38px}
 .btn--big{padding:15px 30px;font-size:16px}
 .btn:active{transform:translateY(1px)}
 .btn svg{width:16px;height:16px;flex:0 0 auto}
@@ -155,11 +155,16 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 }
 .btn[data-link]:focus-visible::after{opacity:1;transform:translate(-50%,0)}
 .btn[data-link]:focus-visible::before{opacity:1;transform:translate(-50%,0) rotate(45deg)}
+/* the header button sits at the right edge, so its tooltip hangs from that edge */
+.nav .btn[data-link]::after{left:auto;right:0;transform:translate(0,4px)}
+.nav .btn[data-link]::before{left:auto;right:16px;transform:translate(0,4px) rotate(45deg)}
+.nav .btn[data-link]:focus-visible::after{transform:translate(0,0)}
+.nav .btn[data-link]:focus-visible::before{transform:translate(0,0) rotate(45deg)}
 
 /* ------------------------------------------------------------------- hero */
 .hero{
   max-width:var(--wrap);margin:0 auto;
-  padding:clamp(48px,7vw,96px) 22px clamp(40px,5vw,72px);
+  padding:clamp(48px,7vw,96px) 22px clamp(30px,4vw,54px);
   display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr);
   gap:clamp(28px,5vw,64px);align-items:center;
 }
@@ -269,7 +274,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   transition:border-color .25s var(--ease),background .25s var(--ease),
              transform .25s var(--ease),box-shadow .25s var(--ease);
 }
-.card>*,.proj>*,.paper>*,.ip>*,.talk>*,.contrib>*{position:relative;z-index:1}
+.card>*,.proj>*,.paper>*,.ip>*,.talk>*{position:relative;z-index:1}
 .card h3,.proj h3{font-size:17.5px;font-weight:600;margin-bottom:9px;letter-spacing:-.02em}
 .card p,.proj p{margin:0;color:var(--paper-2);font-size:15px;line-height:1.48}
 
@@ -286,6 +291,20 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .proj--lead h3{font-size:clamp(20px,2.4vw,26px);margin-bottom:12px}
 .proj--lead p{font-size:16px;max-width:80ch}
 .proj--lead .proj__year{color:var(--signal)}
+
+/* older projects, one line each, so the card grid stays for current work */
+.mini{
+  list-style:none;margin:0;padding:0;
+  display:grid;gap:2px 26px;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
+}
+.mini li{padding:14px 0;border-top:1px solid var(--rule)}
+.mini__year{
+  font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.07em;
+  color:var(--paper-2);display:block;margin-bottom:5px;
+}
+.mini b{display:block;font-size:15.5px;font-weight:600;letter-spacing:-.02em;margin-bottom:3px}
+.mini span:not(.mini__year){display:block;color:var(--paper-2);font-size:14px;line-height:1.45}
 
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0 !important}
 .tags span{
@@ -401,7 +420,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   .btn:hover{background:#7bebc0;border-color:#7bebc0}
   .btn--ghost:hover{background:var(--surface-hi);border-color:var(--paper-2);color:var(--paper)}
   /* one hover language for every block: lift, green edge, accent picks up colour */
-  .card:hover,.proj:hover,.ip:hover,.talk:hover,.paper:hover,.contrib:hover{
+  .card:hover,.proj:hover,.ip:hover,.talk:hover,.paper:hover{
     border-color:rgba(76,224,165,.42);
     background:var(--surface-hi);
     transform:translateY(-3px);
@@ -418,11 +437,13 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   .btn--ghost:hover{box-shadow:0 8px 24px rgba(0,0,0,.35)}
   .btn[data-link]:hover::after{opacity:1;transform:translate(-50%,0)}
   .btn[data-link]:hover::before{opacity:1;transform:translate(-50%,0) rotate(45deg)}
+  .nav .btn[data-link]:hover::after{transform:translate(0,0)}
+  .nav .btn[data-link]:hover::before{transform:translate(0,0) rotate(45deg)}
   .portrait:hover{border-color:rgba(76,224,165,.5);box-shadow:0 22px 60px rgba(76,224,165,.14)}
   .portrait:hover img{transform:scale(1.06);filter:saturate(1) contrast(1.05)}
 
   /* the card lights up under the cursor, --mx/--my come from app.js */
-  .card::after,.proj::after,.paper::after,.ip::after,.talk::after,.contrib::after{
+  .card::after,.proj::after,.paper::after,.ip::after,.talk::after{
     content:"";position:absolute;inset:0;border-radius:inherit;z-index:0;
     pointer-events:none;opacity:0;
     background:radial-gradient(300px circle at var(--mx,50%) var(--my,0%),
@@ -430,7 +451,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
     transition:opacity .3s var(--ease);
   }
   .card:hover::after,.proj:hover::after,.paper:hover::after,
-  .ip:hover::after,.talk:hover::after,.contrib:hover::after{opacity:1}
+  .ip:hover::after,.talk:hover::after{opacity:1}
 }
 
 /* ----------------------------------------------------------------- reveal */
@@ -440,7 +461,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
    cascade keeps running past the third card in long lists. */
 /* :where() keeps these at one-class specificity so :hover on a card still wins */
 :where(.reveal) .card,:where(.reveal) .proj,:where(.reveal) .talk,:where(.reveal) .ip,
-:where(.reveal) .paper,:where(.reveal) .timeline li,:where(.reveal) .contrib{
+:where(.reveal) .paper,:where(.reveal) .timeline li,:where(.reveal) .mini li{
   opacity:0;transform:translateY(18px) scale(.985);filter:blur(4px);
   transition:opacity .5s var(--ease),transform .5s var(--ease),filter .5s var(--ease),
              border-color .2s var(--ease),background .2s var(--ease);
@@ -448,17 +469,32 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 }
 :where(.reveal.is-in) .card,:where(.reveal.is-in) .proj,:where(.reveal.is-in) .talk,
 :where(.reveal.is-in) .ip,:where(.reveal.is-in) .paper,:where(.reveal.is-in) .timeline li,
-:where(.reveal.is-in) .contrib{
+:where(.reveal.is-in) .mini li{
   opacity:1;transform:none;filter:none;
 }
 
 /* ------------------------------------------------------------ breakpoints */
+@media (max-width:1040px){
+  .portrait{width:min(258px,30vw)}
+}
 @media (max-width:880px){
-  .hero{grid-template-columns:1fr;padding-top:40px}
+  :root{--nav-h:104px}
+  .hero{grid-template-columns:1fr;padding-top:36px}
   .hero__portrait{order:-1;justify-content:flex-start}
   .portrait{width:min(190px,50vw)}
-  .nav__links{display:none}
-  .nav{gap:14px}
+  /* the sections stay reachable on a phone: the links scroll instead of hiding */
+  .nav{gap:10px 14px;flex-wrap:wrap;padding-bottom:0}
+  .nav .btn{margin-left:auto}
+  .nav__links{
+    order:3;width:100%;margin:0;padding:0 0 9px;gap:20px;
+    flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .nav__links::-webkit-scrollbar{display:none}
+  .nav__links a{white-space:nowrap;padding:4px 0}
+}
+@media (max-width:600px){
+  :where(.reveal) .card,:where(.reveal) .proj,:where(.reveal) .talk,:where(.reveal) .ip,
+  :where(.reveal) .paper,:where(.reveal) .timeline li,:where(.reveal) .mini li{filter:none}
 }
 @media (max-width:480px){
   body{font-size:15.5px}
@@ -471,58 +507,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important}
   .reveal,.reveal .card,.reveal .proj,.reveal .talk,.reveal .ip,
-  .reveal .paper,.reveal .timeline li,.reveal .contrib{opacity:1;transform:none;filter:none}
-  .reveal .contrib__grid rect{opacity:1;transform:none}
+  .reveal .paper,.reveal .timeline li,.reveal .mini li{opacity:1;transform:none;filter:none}
   .section__title::after{transform:scaleX(1)}
 }
 
-/* GitHub activity ------------------------------------------------------- */
-
-.contrib{
-  position:relative;isolation:isolate;
-  background:var(--surface);
-  border:1px solid var(--rule);
-  border-radius:14px;
-  padding:18px 18px 14px;
-  transition:border-color .25s var(--ease),background .25s var(--ease),
-             transform .25s var(--ease),box-shadow .25s var(--ease);
-}
-/* the calendar fills in as a wave, column by column, --d is set by the builder */
-.reveal .contrib__grid rect{
-  opacity:0;transform:scale(.55);transform-box:fill-box;transform-origin:center;
-  transition:opacity .3s var(--ease),transform .3s var(--ease);
-  transition-delay:calc(var(--d,0) * 9ms);
-}
-.reveal.is-in .contrib__grid rect{opacity:1;transform:none}
-.contrib__total{
-  font-family:var(--mono);
-  font-size:17px;
-  font-weight:600;
-  color:var(--signal);
-}
-.contrib__scroll{overflow-x:auto;padding-bottom:4px}
-.contrib__grid{display:block;min-width:640px;max-width:100%;height:auto}
-.contrib__mon,.contrib__dow{
-  font-family:var(--mono);
-  font-size:9.5px;
-  fill:var(--paper-2);
-  letter-spacing:.04em;
-}
-.contrib__grid rect{stroke:rgba(255,255,255,.04)}
-.contrib__grid .c0,.contrib__key .c0{fill:var(--surface-hi)}
-.contrib__grid .c1,.contrib__key .c1{fill:#1d4a3b}
-.contrib__grid .c2,.contrib__key .c2{fill:#2a7d61}
-.contrib__grid .c3,.contrib__key .c3{fill:#37b183}
-.contrib__grid .c4,.contrib__key .c4{fill:var(--signal)}
-.contrib__legend{
-  display:flex;align-items:center;gap:4px;justify-content:flex-end;
-  margin:10px 0 0;font-family:var(--mono);font-size:11px;color:var(--paper-2);
-}
-.contrib__legend span:first-child{margin-right:4px}
-.contrib__legend span:last-child{margin-left:4px}
-.contrib__key{display:block}
-
-@media (max-width:480px){
-  .contrib{padding:14px 14px 12px}
-  .contrib__legend{justify-content:flex-start}
-}

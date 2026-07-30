@@ -16,7 +16,7 @@
 
     /* Stagger index for the cascade. Capped so a ten-card section still
        finishes inside half a second. */
-    var STAGGER_SEL = '.card,.proj,.paper,.talk,.ip,.timeline li,.contrib';
+    var STAGGER_SEL = '.card,.proj,.paper,.talk,.ip,.timeline li,.mini li';
     revealables.forEach(function (root) {
       var kids = root.querySelectorAll(STAGGER_SEL);
       for (var i = 0; i < kids.length; i++) {
@@ -35,25 +35,8 @@
       if (el.classList.contains('is-in')) return;
       el.classList.add('is-in');
       io.unobserve(el);
-      countUp(el);
       var i = pending.indexOf(el);
       if (i > -1) pending.splice(i, 1);
-    }
-
-    /* The contribution total counts up once, when its section arrives. */
-    function countUp(root) {
-      var el = root.querySelector ? root.querySelector('.contrib__total') : null;
-      if (!el || el.getAttribute('data-counted')) return;
-      var target = parseInt(el.textContent.replace(/\D/g, ''), 10);
-      if (!target) return;
-      el.setAttribute('data-counted', '1');
-      var t0 = 0;
-      (function step(ts) {
-        if (!t0) t0 = ts;
-        var p = Math.min((ts - t0) / 900, 1);
-        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
-        if (p < 1) window.requestAnimationFrame(step);
-      })(0);
     }
 
     /* Safety sweep. Fast or programmatic scrolling can outrun the observer and
@@ -85,7 +68,7 @@
   /* ---------- cursor spotlight on cards ---------- */
   var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   if (!reduced && fine && document.documentElement.classList) {
-    var SPOT_SEL = '.card,.proj,.paper,.ip,.talk,.contrib';
+    var SPOT_SEL = '.card,.proj,.paper,.ip,.talk';
     var spotTarget = null, spotX = 0, spotY = 0, spotQueued = false;
 
     function paintSpot() {
