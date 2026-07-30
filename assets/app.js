@@ -16,7 +16,7 @@
 
     /* Stagger index for the cascade. Capped so a ten-card section still
        finishes inside half a second. */
-    var STAGGER_SEL = '.card,.proj,.paper,.talk,.ip,.timeline li,.mini li';
+    var STAGGER_SEL = '.card,.proj,.paper,.talk,.ip,.timeline li';
     revealables.forEach(function (root) {
       var kids = root.querySelectorAll(STAGGER_SEL);
       for (var i = 0; i < kids.length; i++) {

@@ -292,20 +292,6 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .proj--lead p{font-size:16px;max-width:80ch}
 .proj--lead .proj__year{color:var(--signal)}
 
-/* older projects, one line each, so the card grid stays for current work */
-.mini{
-  list-style:none;margin:0;padding:0;
-  display:grid;gap:2px 26px;
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
-}
-.mini li{padding:14px 0;border-top:1px solid var(--rule)}
-.mini__year{
-  font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.07em;
-  color:var(--paper-2);display:block;margin-bottom:5px;
-}
-.mini b{display:block;font-size:15.5px;font-weight:600;letter-spacing:-.02em;margin-bottom:3px}
-.mini span:not(.mini__year){display:block;color:var(--paper-2);font-size:14px;line-height:1.45}
-
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0 !important}
 .tags span{
   font-family:var(--mono);font-size:11.5px;font-weight:500;
@@ -461,15 +447,14 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
    cascade keeps running past the third card in long lists. */
 /* :where() keeps these at one-class specificity so :hover on a card still wins */
 :where(.reveal) .card,:where(.reveal) .proj,:where(.reveal) .talk,:where(.reveal) .ip,
-:where(.reveal) .paper,:where(.reveal) .timeline li,:where(.reveal) .mini li{
+:where(.reveal) .paper,:where(.reveal) .timeline li{
   opacity:0;transform:translateY(18px) scale(.985);filter:blur(4px);
   transition:opacity .5s var(--ease),transform .5s var(--ease),filter .5s var(--ease),
              border-color .2s var(--ease),background .2s var(--ease);
   transition-delay:calc(var(--i,0) * 55ms);
 }
 :where(.reveal.is-in) .card,:where(.reveal.is-in) .proj,:where(.reveal.is-in) .talk,
-:where(.reveal.is-in) .ip,:where(.reveal.is-in) .paper,:where(.reveal.is-in) .timeline li,
-:where(.reveal.is-in) .mini li{
+:where(.reveal.is-in) .ip,:where(.reveal.is-in) .paper,:where(.reveal.is-in) .timeline li{
   opacity:1;transform:none;filter:none;
 }
 
@@ -494,7 +479,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 }
 @media (max-width:600px){
   :where(.reveal) .card,:where(.reveal) .proj,:where(.reveal) .talk,:where(.reveal) .ip,
-  :where(.reveal) .paper,:where(.reveal) .timeline li,:where(.reveal) .mini li{filter:none}
+  :where(.reveal) .paper,:where(.reveal) .timeline li{filter:none}
 }
 @media (max-width:480px){
   body{font-size:15.5px}
@@ -507,7 +492,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important}
   .reveal,.reveal .card,.reveal .proj,.reveal .talk,.reveal .ip,
-  .reveal .paper,.reveal .timeline li,.reveal .mini li{opacity:1;transform:none;filter:none}
+  .reveal .paper,.reveal .timeline li{opacity:1;transform:none;filter:none}
   .section__title::after{transform:scaleX(1)}
 }
 
