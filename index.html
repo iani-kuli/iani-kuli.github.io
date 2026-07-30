@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Iana Kulichenko | AI Researcher</title>
-<meta name="description" content="Iana Kulichenko, AI researcher working on generative layout systems, multimodal LLMs and agentic pipelines. Research Engineer at Fusionbrain Lab.">
+<meta name="description" content="Iana Kulichenko, AI researcher working on generative AI, multi-agent LLM systems and evolutionary algorithms. Research Engineer at Fusionbrain Lab.">
+<meta name="author" content="Iana Kulichenko">
 <meta property="og:title" content="Iana Kulichenko | AI Researcher">
-<meta property="og:description" content="Generative layout systems, multimodal LLMs, agentic pipelines.">
+<meta property="og:description" content="Generative AI, multi-agent LLM systems, multimodal models, evolutionary algorithms.">
 <meta property="og:image" content="https://iani-kuli.github.io/assets/photo.jpg">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://iani-kuli.github.io/">
-<meta name="author" content="Iana Kulichenko">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://iani-kuli.github.io/">
 <script type="application/ld+json">
@@ -26,11 +26,11 @@
   "worksFor": { "@type": "Organization", "name": "Fusionbrain Lab" },
   "knowsAbout": [
     "Generative models",
+    "Multi-agent systems",
     "Multimodal large language models",
-    "Agentic systems",
+    "Evolutionary algorithms",
     "Computer vision",
-    "Medical image segmentation",
-    "Evolutionary algorithms"
+    "Medical image segmentation"
   ],
   "sameAs": [
     "https://github.com/iani-kuli",
@@ -44,14 +44,15 @@
 </head>
 <body>
 
+<a class="skip" href="#focus">Skip to content</a>
 <canvas id="field" aria-hidden="true"></canvas>
 
 <header class="nav">
-  <a class="nav__mark" href="#top">IK</a>
-  <nav class="nav__links">
-    <a href="#research">Research</a>
+  <a class="nav__mark" href="#top" aria-label="Back to top">IK</a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#focus">Focus</a>
+    <a href="#projects">Projects</a>
     <a href="#publication">Publication</a>
-    <a href="#work">Work</a>
     <a href="#background">Background</a>
   </nav>
   <a class="btn btn--small" href="mailto:kulichenkoiana@gmail.com">Get in touch</a>
@@ -64,72 +65,144 @@
       <p class="eyebrow">AI Researcher at Fusionbrain Lab</p>
       <h1>Iana Kulichenko</h1>
       <p class="lede">
-        I build generative systems whose output has to be structurally valid: apartment
-        layouts that respect real room boundaries, furnished 3D scenes, and the agent
-        pipelines that assemble them.
+        I work on generative AI, multi-agent LLM systems and evolutionary algorithms.
+        My projects run from evolutionary search for trading signals to layout generation,
+        multimodal model adaptation and medical image segmentation.
       </p>
       <p class="sub">
         PhD candidate in Computational and Data Science and Engineering at an AI research
-        institute. Published in IEEE Sensors Letters. Currently also running an evolutionary
-        search for alpha signals on MOEX equities.
+        institute. Published in IEEE Sensors Letters.
       </p>
       <div class="hero__actions">
         <a class="btn" href="mailto:kulichenkoiana@gmail.com">Get in touch</a>
-        <a class="btn btn--ghost" href="https://github.com/iani-kuli">GitHub</a>
+        <a class="btn btn--ghost" href="https://github.com/iani-kuli" rel="noopener">GitHub</a>
       </div>
     </div>
     <div class="hero__portrait">
       <div class="portrait">
-        <img src="assets/photo.jpg" alt="Portrait of Iana Kulichenko" width="720" height="720" loading="eager">
+        <img src="assets/photo.jpg" alt="Portrait of Iana Kulichenko" width="720" height="720" fetchpriority="high">
       </div>
     </div>
   </section>
 
-  <section id="research" class="section reveal">
-    <h2 class="section__title"><span class="idx">01</span>Research</h2>
+  <section id="focus" class="section reveal">
+    <h2 class="section__title"><span class="idx">01</span>Focus</h2>
     <div class="grid grid--cards">
 
       <article class="card">
-        <h3>Generative layout systems</h3>
-        <p>A multi-agent LLM pipeline that draws 2D floor plans inside fixed room boundaries,
-        then selects furniture and places it to render a furnished 3D scene.</p>
-        <p class="tags">LLM agents<i></i>constraint satisfaction<i></i>3D scene graphs</p>
+        <h3>Evolutionary algorithms</h3>
+        <p>LLM-guided evolution over program spaces, where a population of candidate programs
+        is mutated, scored and selected across generations.</p>
+        <p class="tags"><span>genetic programming</span><span>MAP-Elites</span><span>fitness design</span></p>
       </article>
 
       <article class="card">
-        <h3>Multimodal LLM adaptation</h3>
-        <p>Parameter-efficient fine-tuning with LoRA and QLoRA, supervised fine-tuning and RL
-        for post-training. Applied to InternVL2-1B on the temporal video-QA tasks of MVBench.</p>
-        <p class="tags">PEFT<i></i>QLoRA<i></i>SFT and RL<i></i>MVBench</p>
+        <h3>Multi-agent LLM systems</h3>
+        <p>Pipelines where each agent owns one step and the joint output has to satisfy hard
+        constraints rather than merely look plausible.</p>
+        <p class="tags"><span>agent orchestration</span><span>constraint satisfaction</span><span>tool use</span></p>
       </article>
 
       <article class="card">
-        <h3>Latent-space image editing</h3>
-        <p>StyleGAN-2 encoder optimization, comparison of GAN inversion and editing methods,
-        subject personalization in Stable Diffusion through Textual Inversion.</p>
-        <p class="tags">StyleGAN-2<i></i>GAN inversion<i></i>Textual Inversion</p>
+        <h3>Generative models</h3>
+        <p>Diffusion models and GANs for image synthesis and editing, including latent-space
+        inversion and subject personalization.</p>
+        <p class="tags"><span>diffusion</span><span>StyleGAN-2</span><span>latent editing</span></p>
       </article>
 
       <article class="card">
-        <h3>Medical image segmentation</h3>
-        <p>MRI brain segmentation and classification with U-Net, U-Net++, PAN, DeepLabV3+,
-        SAM and MedSAM.</p>
-        <p class="tags">MedSAM<i></i>U-Net++<i></i>DeepLabV3+</p>
+        <h3>Multimodal LLMs</h3>
+        <p>Adapting vision-language models to new tasks with parameter-efficient fine-tuning,
+        supervised fine-tuning and RL post-training.</p>
+        <p class="tags"><span>LoRA and QLoRA</span><span>SFT</span><span>RL post-training</span></p>
       </article>
 
-      <article class="card card--wide">
-        <h3>Evolutionary alpha discovery</h3>
-        <p>LLM-guided evolutionary search over factor expressions for MOEX equities.
-        Candidates are scored by walk-forward backtests and screened against multiple testing
-        with the deflated Sharpe ratio, PBO and the model confidence set.</p>
-        <p class="tags">genetic programming<i></i>walk-forward validation<i></i>multiple-testing control</p>
+    </div>
+  </section>
+
+  <section id="projects" class="section reveal">
+    <h2 class="section__title"><span class="idx">02</span>Projects</h2>
+    <div class="grid grid--projects">
+
+      <article class="proj proj--lead">
+        <span class="proj__year">2025 to now</span>
+        <h3>Evolutionary alpha search on markets</h3>
+        <p>An LLM proposes and mutates factor expressions for Russian equities, generation
+        after generation. Every candidate is scored by walk-forward backtests over a decade of
+        daily data and screened against multiple testing with the deflated Sharpe ratio,
+        probability of backtest overfitting and the model confidence set, so that survivors
+        are not artefacts of the search itself.</p>
+        <p class="tags"><span>genetic programming</span><span>walk-forward validation</span><span>multiple-testing control</span></p>
+      </article>
+
+      <article class="proj">
+        <span class="proj__year">2025</span>
+        <h3>Multi-agent floor plan generation</h3>
+        <p>A multi-agent LLM system recommends furniture selections and placements within
+        defined room boundaries, then renders realistic 3D rooms.</p>
+      </article>
+
+      <article class="proj">
+        <span class="proj__year">2024 to 2025</span>
+        <h3>StyleGAN-2 encoder optimization</h3>
+        <p>Encoder optimization with an analysis of image inversion and editing methods,
+        raising the quality of generated and edited images.</p>
+      </article>
+
+      <article class="proj">
+        <span class="proj__year">2024</span>
+        <h3>Multimodal LLM fine-tuning</h3>
+        <p>Parameter-efficient fine-tuning, including QLoRA, applied to InternVL2-1B to lift
+        performance on the temporal tasks of MVBench.</p>
+      </article>
+
+      <article class="proj">
+        <span class="proj__year">2024</span>
+        <h3>NeuroScanAI</h3>
+        <p>Segmentation and classification of MRI brain images with U-Net, U-Net++, PAN,
+        DeepLabV3+, SAM and MedSAM.</p>
+      </article>
+
+      <article class="proj">
+        <span class="proj__year">2024</span>
+        <h3>Personalized image generation</h3>
+        <p>Embeddings tuned through Textual Inversion in Stable Diffusion, creating custom
+        tokens for personalized subjects.</p>
+      </article>
+
+      <article class="proj">
+        <span class="proj__year">2023</span>
+        <h3>Text-to-image model comparison</h3>
+        <p>Comparative analysis of Stable Diffusion, VQGAN with CLIP, Dreamlike Diffusion and
+        DALL-E 2 for generating token artwork.</p>
+      </article>
+
+      <article class="proj">
+        <span class="proj__year">2024</span>
+        <h3>Panorama stitching</h3>
+        <p>SIFT and ORB feature matching with camera calibration, producing high-precision
+        panoramic images.</p>
+      </article>
+
+      <article class="proj">
+        <span class="proj__year">2023</span>
+        <h3>Object detection with YOLO</h3>
+        <p>Data labeling and detection pipeline built on YOLO and LabelImg for efficient
+        annotation and inference.</p>
+      </article>
+
+      <article class="proj">
+        <span class="proj__year">2022</span>
+        <h3>Graph-based recommender</h3>
+        <p>Recommendation system built on graph neural networks combined with collaborative
+        filtering.</p>
       </article>
 
     </div>
   </section>
 
   <section id="publication" class="section reveal">
-    <h2 class="section__title"><span class="idx">02</span>Publication</h2>
+    <h2 class="section__title"><span class="idx">03</span>Publication</h2>
     <article class="paper">
       <p class="paper__venue">IEEE Sensors Letters, July 2025</p>
       <h3>Machine Learning-Driven Compensation for Non-Ideal Channels in AWG-Based FBG Interrogator</h3>
@@ -143,66 +216,10 @@
         below 5 pm across an extended 2.9 nm span without refitting.
       </p>
       <div class="paper__links">
-        <a class="btn btn--ghost btn--small" href="https://doi.org/10.1109/LSENS.2025.3585057">DOI</a>
-        <a class="btn btn--ghost btn--small" href="https://arxiv.org/abs/2506.13575">arXiv 2506.13575</a>
+        <a class="btn btn--ghost btn--small" href="https://doi.org/10.1109/LSENS.2025.3585057" rel="noopener">DOI 10.1109/LSENS.2025.3585057</a>
+        <a class="btn btn--ghost btn--small" href="https://arxiv.org/abs/2506.13575" rel="noopener">arXiv 2506.13575</a>
       </div>
     </article>
-  </section>
-
-  <section id="work" class="section reveal">
-    <h2 class="section__title"><span class="idx">03</span>Projects</h2>
-    <div class="grid grid--repos">
-
-      <article class="repo">
-        <h3>Multi-agent floor plan generation</h3>
-        <p>Multi-agent LLM system that recommends furniture selections and placements within
-        defined room boundaries, then renders realistic 3D rooms.</p>
-      </article>
-
-      <article class="repo">
-        <h3>Evolutionary alpha search on MOEX</h3>
-        <p>LLM-guided evolution of factor expressions for Russian equities. Walk-forward
-        backtests, multiple-testing control with deflated Sharpe ratio, PBO and the model
-        confidence set.</p>
-      </article>
-
-      <article class="repo">
-        <h3>StyleGAN-2 encoder optimization</h3>
-        <p>Encoder optimization with an analysis of image inversion and editing methods,
-        raising the quality of generated and edited images.</p>
-      </article>
-
-      <article class="repo">
-        <h3>Multimodal LLM fine-tuning</h3>
-        <p>Parameter-efficient fine-tuning, including QLoRA, applied to InternVL2-1B to
-        improve model performance on the temporal tasks of MVBench.</p>
-      </article>
-
-      <article class="repo">
-        <h3>NeuroScanAI</h3>
-        <p>Segmentation and classification of MRI brain images with U-Net, U-Net++, PAN,
-        DeepLabV3+, SAM and MedSAM.</p>
-      </article>
-
-      <article class="repo">
-        <h3>Personalized image generation</h3>
-        <p>Embeddings tuned through Textual Inversion in Stable Diffusion, creating custom
-        tokens for personalized subjects.</p>
-      </article>
-
-      <article class="repo">
-        <h3>Panorama stitching</h3>
-        <p>SIFT and ORB feature matching with camera calibration, producing high-precision
-        panoramic images.</p>
-      </article>
-
-      <article class="repo">
-        <h3>Accessible video playback</h3>
-        <p>Video player that detects and suppresses photosensitive triggers for viewers with
-        epilepsy.</p>
-      </article>
-
-    </div>
   </section>
 
   <section id="background" class="section reveal">
@@ -239,8 +256,8 @@
           <li>
             <span class="when">2025 to 2028</span>
             <b>PhD, Computational and Data Science and Engineering</b>
-            <span>AI research institute. Generative AI for full-apartment layout and interior
-            design.</span>
+            <span>AI research institute. Generative AI systems for full-apartment layout and
+            interior design.</span>
           </li>
           <li>
             <span class="when">2023 to 2025</span>
@@ -250,23 +267,24 @@
           <li>
             <span class="when">2019 to 2023</span>
             <b>BSc, Applied Mathematics and Informatics</b>
-            <span>Mathematics, statistics, classical and deep machine learning.</span>
+            <span>Mathematics, statistics, classical and deep machine learning, big data.</span>
           </li>
         </ul>
-
-        <h3 class="minor minor--spaced">Toolbox</h3>
-        <p class="chips">
-          <span>Python</span><span>C++</span><span>PyTorch</span><span>TensorFlow</span>
-          <span>Hugging Face</span><span>Docker</span><span>Linux</span>
-          <span>Weights &amp; Biases</span><span>MLflow</span><span>SQL</span><span>LaTeX</span>
-        </p>
       </div>
     </div>
+
+    <h3 class="minor minor--spaced">Toolbox</h3>
+    <p class="chips">
+      <span>Python</span><span>C++</span><span>SQL</span><span>R</span>
+      <span>PyTorch</span><span>TensorFlow</span><span>Hugging Face</span>
+      <span>Docker</span><span>Linux</span><span>Weights &amp; Biases</span>
+      <span>MLflow</span><span>Git</span><span>LaTeX</span>
+    </p>
   </section>
 
   <section class="section closing reveal">
     <h2>Open to research collaboration</h2>
-    <p>Generative modelling, multimodal LLMs, agentic systems.</p>
+    <p>Generative AI, multi-agent systems, evolutionary algorithms.</p>
     <a class="btn btn--big" href="mailto:kulichenkoiana@gmail.com">kulichenkoiana@gmail.com</a>
   </section>
 
@@ -274,7 +292,7 @@
 
 <footer class="foot">
   <span>Iana Kulichenko</span>
-  <a href="https://github.com/iani-kuli">github.com/iani-kuli</a>
+  <a href="https://github.com/iani-kuli" rel="noopener">github.com/iani-kuli</a>
 </footer>
 
 <script src="assets/app.js"></script>
