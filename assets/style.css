@@ -48,7 +48,7 @@
 
   --wrap:1160px;
   --nav-h:64px;
-  --ease:cubic-bezier(.2,.6,.3,1);
+  --ease:cubic-bezier(.4,0,.2,1);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -149,6 +149,46 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   border:1px solid var(--rule-hi);background:var(--surface);
   filter:saturate(.92) contrast(1.02);
 }
+
+/* ----------------------------------------------------------------- ribbon */
+.ribbon{
+  display:grid;gap:10px;
+  padding:14px 0 6px;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  margin:clamp(8px,2vw,26px) 0 0;
+}
+.ribbon__row{
+  display:flex;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+}
+.ribbon__track{
+  display:flex;flex:0 0 auto;gap:10px;margin:0;padding:0 5px;list-style:none;
+  animation:marquee 46s linear infinite;
+}
+.ribbon__row--rev .ribbon__track{animation-name:marquee-reverse}
+.ribbon__track li{
+  flex:0 0 auto;
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.02em;
+  color:var(--paper-2);
+  padding:6px 13px;border:1px solid var(--rule);border-radius:7px;
+  white-space:nowrap;
+}
+.ribbon__row--rev .ribbon__track li{color:var(--paper-2);border-color:var(--rule)}
+.ribbon:hover .ribbon__track{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@keyframes marquee-reverse{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+
+/* ------------------------------------------------------------ hero enters */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero__text>*,.hero__portrait{animation:rise .7s cubic-bezier(.4,0,.2,1) both}
+.hero__text>*:nth-child(1){animation-delay:.05s}
+.hero__text>*:nth-child(2){animation-delay:.12s}
+.hero__text>*:nth-child(3){animation-delay:.19s}
+.hero__text>*:nth-child(4){animation-delay:.26s}
+.hero__text>*:nth-child(5){animation-delay:.33s}
+.hero__portrait{animation-delay:.18s}
 
 /* --------------------------------------------------------------- sections */
 .section{max-width:var(--wrap);margin:0 auto;padding:clamp(44px,5vw,72px) 22px}
