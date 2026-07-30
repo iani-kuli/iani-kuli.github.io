@@ -120,8 +120,10 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 }
 .btn--ghost{background:transparent;color:var(--paper);border-color:var(--rule-hi)}
 .btn--small{padding:8px 15px;font-size:13.5px;border-radius:8px}
-.btn--big{padding:15px 30px;font-size:16px;margin-top:22px}
+.btn--big{padding:15px 30px;font-size:16px}
 .btn:active{transform:translateY(1px)}
+.btn svg{width:16px;height:16px;flex:0 0 auto}
+.btn--big svg{width:18px;height:18px}
 
 /* ------------------------------------------------------------------- hero */
 .hero{
@@ -319,6 +321,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .closing{text-align:center;padding-bottom:clamp(56px,7vw,100px)}
 .closing h2{font-size:clamp(26px,3.6vw,42px);font-weight:700;letter-spacing:-.038em;margin-bottom:12px}
 .closing p{color:var(--paper-2);margin:0;font-size:16px}
+.closing__actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px}
 .foot{
   max-width:var(--wrap);margin:0 auto;padding:22px 22px 38px;
   display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
@@ -326,6 +329,9 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   font-family:var(--mono);font-size:12.5px;color:var(--paper-2);
 }
 .foot__alt{margin-left:9px;opacity:.75}
+.foot__links{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.foot__links a{display:inline-flex;align-items:center;gap:6px}
+.foot__links svg{width:14px;height:14px;flex:0 0 auto}
 
 /* ------------------------------------------------------------ hover layer */
 @media (hover:hover) and (pointer:fine){
