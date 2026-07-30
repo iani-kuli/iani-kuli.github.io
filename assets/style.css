@@ -103,10 +103,17 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 }
 .nav__links{display:flex;gap:24px;margin-right:auto;flex-wrap:wrap}
 .nav__links a{
+  position:relative;
   font-size:14px;color:var(--paper-2);padding:6px 0;
   transition:color .18s var(--ease);
 }
+.nav__links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--signal);transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .22s var(--ease);
+}
 .nav__links a.is-active{color:var(--paper)}
+.nav__links a.is-active::after{transform:scaleX(1)}
 
 /* ---------------------------------------------------------------- buttons */
 .btn{
@@ -259,7 +266,8 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   border:1px solid var(--rule);
   border-radius:14px;
   padding:22px;
-  transition:border-color .2s var(--ease),background .2s var(--ease);
+  transition:border-color .25s var(--ease),background .25s var(--ease),
+             transform .25s var(--ease),box-shadow .25s var(--ease);
 }
 .card>*,.proj>*,.paper>*,.ip>*,.talk>*,.contrib>*{position:relative;z-index:1}
 .card h3,.proj h3{font-size:17.5px;font-weight:600;margin-bottom:9px;letter-spacing:-.02em}
@@ -340,6 +348,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .timeline li::before{
   content:"";position:absolute;left:-3.5px;top:9px;width:6px;height:6px;
   border-radius:50%;background:var(--signal);
+  transition:box-shadow .25s var(--ease);
 }
 .timeline .when{
   display:block;font-family:var(--mono);font-size:11.5px;font-weight:500;
@@ -355,7 +364,12 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   transition:border-color .18s var(--ease),color .18s var(--ease);
 }
 
-.ilink{color:var(--signal);border-bottom:1px solid rgba(76,224,165,.32)}
+.ilink{
+  color:var(--signal);border-bottom:1px solid rgba(76,224,165,.32);
+  background-image:linear-gradient(var(--signal),var(--signal));
+  background-repeat:no-repeat;background-position:0 100%;background-size:0 1px;
+  transition:background-size .3s var(--ease),border-color .2s var(--ease);
+}
 
 /* ------------------------------------------------------- closing + footer */
 .closing{text-align:center;padding-bottom:clamp(56px,7vw,100px)}
@@ -382,10 +396,21 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 @media (hover:hover) and (pointer:fine){
   .nav__mark:hover{border-color:var(--signal);color:var(--signal)}
   .nav__links a:hover{color:var(--paper)}
+  .nav__links a:hover::after{transform:scaleX(1)}
+  .ilink:hover{background-size:100% 1px;border-bottom-color:transparent}
   .btn:hover{background:#7bebc0;border-color:#7bebc0}
   .btn--ghost:hover{background:var(--surface-hi);border-color:var(--paper-2);color:var(--paper)}
-  .card:hover,.proj:hover,.ip:hover,.talk:hover{border-color:var(--rule-hi);background:var(--surface-hi)}
-  .paper:hover{border-color:var(--rule-hi)}
+  /* one hover language for every block: lift, green edge, accent picks up colour */
+  .card:hover,.proj:hover,.ip:hover,.talk:hover,.paper:hover,.contrib:hover{
+    border-color:rgba(76,224,165,.42);
+    background:var(--surface-hi);
+    transform:translateY(-3px);
+    box-shadow:0 14px 34px rgba(0,0,0,.34);
+  }
+  .proj:hover .proj__year,.ip:hover .ip__kind,.talk:hover .talk__when{color:var(--signal)}
+  .card:hover .tags span,.proj:hover .tags span{border-color:var(--rule-hi);color:var(--paper)}
+  .paper:hover .paper__ru{border-left-color:var(--signal)}
+  .timeline li:hover::before{box-shadow:0 0 0 4px var(--signal-dim)}
   .chips span:hover{border-color:var(--signal);color:var(--paper)}
   .foot a:hover{color:var(--signal)}
   .ilink:hover{border-bottom-color:var(--signal)}
@@ -413,15 +438,17 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .reveal.is-in{opacity:1;transform:none}
 /* Cards rise one after another. The index comes from app.js as --i, so the
    cascade keeps running past the third card in long lists. */
-.reveal .card,.reveal .proj,.reveal .talk,.reveal .ip,
-.reveal .paper,.reveal .timeline li,.reveal .contrib{
+/* :where() keeps these at one-class specificity so :hover on a card still wins */
+:where(.reveal) .card,:where(.reveal) .proj,:where(.reveal) .talk,:where(.reveal) .ip,
+:where(.reveal) .paper,:where(.reveal) .timeline li,:where(.reveal) .contrib{
   opacity:0;transform:translateY(18px) scale(.985);filter:blur(4px);
   transition:opacity .5s var(--ease),transform .5s var(--ease),filter .5s var(--ease),
              border-color .2s var(--ease),background .2s var(--ease);
   transition-delay:calc(var(--i,0) * 55ms);
 }
-.reveal.is-in .card,.reveal.is-in .proj,.reveal.is-in .talk,.reveal.is-in .ip,
-.reveal.is-in .paper,.reveal.is-in .timeline li,.reveal.is-in .contrib{
+:where(.reveal.is-in) .card,:where(.reveal.is-in) .proj,:where(.reveal.is-in) .talk,
+:where(.reveal.is-in) .ip,:where(.reveal.is-in) .paper,:where(.reveal.is-in) .timeline li,
+:where(.reveal.is-in) .contrib{
   opacity:1;transform:none;filter:none;
 }
 
@@ -457,6 +484,8 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   border:1px solid var(--rule);
   border-radius:14px;
   padding:18px 18px 14px;
+  transition:border-color .25s var(--ease),background .25s var(--ease),
+             transform .25s var(--ease),box-shadow .25s var(--ease);
 }
 /* the calendar fills in as a wave, column by column, --d is set by the builder */
 .reveal .contrib__grid rect{
