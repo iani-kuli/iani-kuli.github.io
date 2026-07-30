@@ -40,8 +40,8 @@
   --rule-hi:#34363e;
   --paper:#f5f5f5;
   --paper-2:#a9adb6;
-  --signal:#ff8a3d;
-  --signal-dim:rgba(255,138,61,.16);
+  --signal:#4ce0a5;
+  --signal-dim:rgba(76,224,165,.16);
 
   --sans:Geist,'Helvetica Neue',Helvetica,Arial,sans-serif;
   --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -82,7 +82,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
 body::after{
   content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   background:
-    radial-gradient(760px 460px at 78% 4%,rgba(255,138,61,.09),transparent 70%),
+    radial-gradient(760px 460px at 78% 4%,rgba(76,224,165,.09),transparent 70%),
     linear-gradient(180deg,rgba(13,13,14,0) 0%,rgba(13,13,14,.8) 56%,var(--ink) 88%);
 }
 main,.nav,.foot,.skip{position:relative;z-index:2}
@@ -234,7 +234,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .proj__year{display:block;margin-bottom:9px}
 .proj--lead{
   grid-column:1/-1;padding:28px;
-  background:linear-gradient(180deg,rgba(255,138,61,.05),rgba(255,138,61,0) 55%),var(--surface);
+  background:linear-gradient(180deg,rgba(76,224,165,.05),rgba(76,224,165,0) 55%),var(--surface);
   border-color:var(--rule-hi);
 }
 .proj--lead h3{font-size:clamp(20px,2.4vw,26px);margin-bottom:12px}
@@ -276,7 +276,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .ip h3{font-family:var(--mono);font-size:19px;font-weight:500;letter-spacing:0;margin-bottom:8px}
 .ip--lead{
   grid-column:1/-1;
-  background:linear-gradient(180deg,rgba(255,138,61,.05),rgba(255,138,61,0) 55%),var(--surface);
+  background:linear-gradient(180deg,rgba(76,224,165,.05),rgba(76,224,165,0) 55%),var(--surface);
   border-color:var(--rule-hi);
 }
 .ip--lead h3{font-size:clamp(20px,2.3vw,24px)}
@@ -317,7 +317,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   transition:border-color .18s var(--ease),color .18s var(--ease);
 }
 
-.ilink{color:var(--signal);border-bottom:1px solid rgba(255,138,61,.32)}
+.ilink{color:var(--signal);border-bottom:1px solid rgba(76,224,165,.32)}
 
 /* ------------------------------------------------------- closing + footer */
 .closing{text-align:center;padding-bottom:clamp(56px,7vw,100px)}
@@ -335,7 +335,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 @media (hover:hover) and (pointer:fine){
   .nav__mark:hover{border-color:var(--signal);color:var(--signal)}
   .nav__links a:hover{color:var(--paper)}
-  .btn:hover{background:#ffa163;border-color:#ffa163}
+  .btn:hover{background:#7bebc0;border-color:#7bebc0}
   .btn--ghost:hover{background:var(--surface-hi);border-color:var(--paper-2);color:var(--paper)}
   .card:hover,.proj:hover,.ip:hover,.talk:hover{border-color:var(--rule-hi);background:var(--surface-hi)}
   .paper:hover{border-color:var(--rule-hi)}
