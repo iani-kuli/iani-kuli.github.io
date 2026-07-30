@@ -386,3 +386,44 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   *,*::before,*::after{animation:none !important;transition:none !important}
   .reveal,.reveal .card,.reveal .proj,.reveal .talk,.reveal .ip{opacity:1;transform:none}
 }
+
+/* GitHub activity ------------------------------------------------------- */
+
+.contrib{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:14px;
+  padding:18px 18px 14px;
+}
+.contrib__total{
+  font-family:var(--mono);
+  font-size:17px;
+  font-weight:600;
+  color:var(--signal);
+}
+.contrib__scroll{overflow-x:auto;padding-bottom:4px}
+.contrib__grid{display:block;min-width:640px;max-width:100%;height:auto}
+.contrib__mon,.contrib__dow{
+  font-family:var(--mono);
+  font-size:9.5px;
+  fill:var(--paper-2);
+  letter-spacing:.04em;
+}
+.contrib__grid rect{stroke:rgba(255,255,255,.04)}
+.contrib__grid .c0,.contrib__key .c0{fill:var(--surface-hi)}
+.contrib__grid .c1,.contrib__key .c1{fill:#1d4a3b}
+.contrib__grid .c2,.contrib__key .c2{fill:#2a7d61}
+.contrib__grid .c3,.contrib__key .c3{fill:#37b183}
+.contrib__grid .c4,.contrib__key .c4{fill:var(--signal)}
+.contrib__legend{
+  display:flex;align-items:center;gap:4px;justify-content:flex-end;
+  margin:10px 0 0;font-family:var(--mono);font-size:11px;color:var(--paper-2);
+}
+.contrib__legend span:first-child{margin-right:4px}
+.contrib__legend span:last-child{margin-left:4px}
+.contrib__key{display:block}
+
+@media (max-width:480px){
+  .contrib{padding:14px 14px 12px}
+  .contrib__legend{justify-content:flex-start}
+}
