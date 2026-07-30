@@ -479,8 +479,9 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 }
 /* the cascade stays on a phone, with a lighter blur so scrolling keeps up */
 @media (max-width:600px){
-  :where(.reveal) .card,:where(.reveal) .proj,:where(.reveal) .talk,:where(.reveal) .ip,
-  :where(.reveal) .paper,:where(.reveal) .timeline li{
+  :where(.reveal:not(.is-in)) .card,:where(.reveal:not(.is-in)) .proj,
+  :where(.reveal:not(.is-in)) .talk,:where(.reveal:not(.is-in)) .ip,
+  :where(.reveal:not(.is-in)) .paper,:where(.reveal:not(.is-in)) .timeline li{
     transform:translateY(14px) scale(.99);filter:blur(2.5px);
   }
 }
