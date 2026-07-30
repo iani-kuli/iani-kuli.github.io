@@ -466,7 +466,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   :root{--nav-h:104px}
   .hero{grid-template-columns:1fr;padding-top:36px}
   .hero__portrait{order:-1;justify-content:flex-start}
-  .portrait{width:min(190px,50vw)}
+  .portrait{width:min(212px,52vw)}
   /* the sections stay reachable on a phone: the links scroll instead of hiding */
   .nav{gap:10px 14px;flex-wrap:wrap;padding-bottom:0}
   .nav .btn{margin-left:auto}
@@ -477,15 +477,40 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   .nav__links::-webkit-scrollbar{display:none}
   .nav__links a{white-space:nowrap;padding:4px 0}
 }
+/* the cascade stays on a phone, with a lighter blur so scrolling keeps up */
 @media (max-width:600px){
   :where(.reveal) .card,:where(.reveal) .proj,:where(.reveal) .talk,:where(.reveal) .ip,
-  :where(.reveal) .paper,:where(.reveal) .timeline li{filter:none}
+  :where(.reveal) .paper,:where(.reveal) .timeline li{
+    transform:translateY(14px) scale(.99);filter:blur(2.5px);
+  }
 }
 @media (max-width:480px){
   body{font-size:15.5px}
   .card,.proj,.ip,.paper{padding:18px}
   .proj--lead{padding:20px}
   .section__title{flex-wrap:wrap;gap:8px}
+}
+
+/* -------------------------------------------------------------- touch layer */
+@media (hover:none){
+  .card:active,.proj:active,.ip:active,.talk:active,.paper:active{
+    border-color:rgba(76,224,165,.42);
+    background:var(--surface-hi);
+    transform:translateY(-2px);
+  }
+  .proj:active .proj__year,.ip:active .ip__kind,.talk:active .talk__when{color:var(--signal)}
+  .portrait:active{border-color:rgba(76,224,165,.5);box-shadow:0 18px 44px rgba(76,224,165,.14)}
+  .portrait:active img{transform:scale(1.04)}
+  .btn:active{box-shadow:0 8px 22px rgba(76,224,165,.18)}
+  .btn--ghost:active{background:var(--surface-hi);border-color:var(--paper-2)}
+}
+
+/* the three hero buttons make a deliberate block instead of a ragged wrap */
+@media (max-width:440px){
+  .hero__actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .hero__actions .btn:first-child{grid-column:1/-1}
+  .closing__actions{display:grid;grid-template-columns:1fr;gap:10px}
+  .btn--big{padding:14px 18px;font-size:15px}
 }
 
 @media (prefers-reduced-motion:reduce){
