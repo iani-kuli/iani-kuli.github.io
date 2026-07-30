@@ -7,19 +7,75 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- scroll reveal ---------- */
-  var revealables = document.querySelectorAll('.reveal');
+  var revealables = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+
   if (reduced || !('IntersectionObserver' in window)) {
     revealables.forEach(function (el) { el.classList.add('is-in'); });
   } else {
+    var pending = revealables.slice();
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-in');
-          io.unobserve(e.target);
-        }
+        if (e.isIntersecting) show(e.target);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -6% 0px' });
     revealables.forEach(function (el) { io.observe(el); });
+
+    function show(el) {
+      if (el.classList.contains('is-in')) return;
+      el.classList.add('is-in');
+      io.unobserve(el);
+      var i = pending.indexOf(el);
+      if (i > -1) pending.splice(i, 1);
+    }
+
+    /* Safety sweep. Fast or programmatic scrolling can outrun the observer and
+       strand a section at opacity 0, which would hide real content. A rect check
+       on every scroll frame makes that impossible. */
+    var sweepQueued = false;
+    function sweep() {
+      sweepQueued = false;
+      var limit = window.innerHeight * 0.94;
+      for (var i = pending.length - 1; i >= 0; i--) {
+        if (pending[i].getBoundingClientRect().top < limit) show(pending[i]);
+      }
+      if (!pending.length) {
+        window.removeEventListener('scroll', queueSweep);
+        window.removeEventListener('resize', queueSweep);
+      }
+    }
+    function queueSweep() {
+      if (sweepQueued) return;
+      sweepQueued = true;
+      window.requestAnimationFrame(sweep);
+    }
+    window.addEventListener('scroll', queueSweep, { passive: true });
+    window.addEventListener('resize', queueSweep);
+    window.addEventListener('load', queueSweep);
+    queueSweep();
+  }
+
+  /* ---------- nav scroll spy ---------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));
+  var targets = navLinks
+    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+
+  if (targets.length && 'IntersectionObserver' in window) {
+    var visible = new Set();
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible.add(e.target.id); else visible.delete(e.target.id);
+      });
+      var current = null;
+      for (var i = 0; i < targets.length; i++) {
+        if (visible.has(targets[i].id)) { current = targets[i].id; break; }
+      }
+      navLinks.forEach(function (a) {
+        a.classList.toggle('is-active', a.getAttribute('href') === '#' + current);
+      });
+    }, { rootMargin: '-30% 0px -55% 0px' });
+    targets.forEach(function (t) { spy.observe(t); });
   }
 
   /* ---------- generative field ---------- */
