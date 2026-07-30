@@ -18,7 +18,15 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Iana Kulichenko",
-  "alternateName": "Iana V. Kulichenko",
+  "alternateName": [
+    "Iana V. Kulichenko",
+    "Yana Kulichenko",
+    "Iana Vladimirovna Kulichenko",
+    "Яна Куличенко",
+    "Куличенко Яна Владимировна"
+  ],
+  "givenName": "Iana",
+  "familyName": "Kulichenko",
   "url": "https://iani-kuli.github.io/",
   "image": "https://iani-kuli.github.io/assets/photo.jpg",
   "jobTitle": "AI Researcher",
@@ -53,6 +61,7 @@
     <a href="#focus">Focus</a>
     <a href="#projects">Projects</a>
     <a href="#publication">Publication</a>
+    <a href="#patents">Patents</a>
     <a href="#background">Background</a>
   </nav>
   <a class="btn btn--small" href="mailto:kulichenkoiana@gmail.com">Get in touch</a>
@@ -71,7 +80,7 @@
       </p>
       <p class="sub">
         PhD candidate in Computational and Data Science and Engineering at an AI research
-        institute. Published in IEEE Sensors Letters.
+        institute.
       </p>
       <div class="hero__actions">
         <a class="btn" href="mailto:kulichenkoiana@gmail.com">Get in touch</a>
@@ -222,8 +231,47 @@
     </article>
   </section>
 
+  <section id="patents" class="section reveal">
+    <h2 class="section__title"><span class="idx">04</span>Patents and IP</h2>
+    <p class="section__note">
+      Three items registered with Rospatent, the Russian federal intellectual property
+      service, filed under <span lang="ru">Куличенко Яна Владимировна</span>.
+    </p>
+    <div class="grid grid--ip">
+
+      <article class="ip ip--lead">
+        <span class="ip__kind">Patent for invention</span>
+        <h3>RU 2861310 C1</h3>
+        <p class="ip__title">Method for interrogating fiber Bragg gratings through an arrayed
+        waveguide grating demultiplexer on a photonic integrated circuit</p>
+        <p>Machine learning recovers the reflected Bragg wavelength from per-channel optical
+        power, replacing the analytical fit that a non-ideal channel response breaks.
+        Registered 4 May 2026.</p>
+      </article>
+
+      <article class="ip">
+        <span class="ip__kind">Software registration</span>
+        <h3>RU 2026613062</h3>
+        <p class="ip__title">Data processing software for fiber Bragg grating sensors</p>
+        <p>Converts the analog photodiode signal to digital, averages readings over a time
+        window and computes measurement error including the standard deviation of the incoming
+        voltage. Written in C++. Registered 3 February 2026.</p>
+      </article>
+
+      <article class="ip">
+        <span class="ip__kind">Software registration</span>
+        <h3>RU 2025681052</h3>
+        <p class="ip__title">Interrogator user software</p>
+        <p>Real-time acquisition, processing and display of fiber Bragg grating sensor data,
+        with adaptive analysis and storage of historical values. Written in TypeScript.
+        Registered 11 August 2025.</p>
+      </article>
+
+    </div>
+  </section>
+
   <section id="background" class="section reveal">
-    <h2 class="section__title"><span class="idx">04</span>Background</h2>
+    <h2 class="section__title"><span class="idx">05</span>Background</h2>
 
     <div class="grid grid--two">
       <div>
@@ -291,7 +339,7 @@
 </main>
 
 <footer class="foot">
-  <span>Iana Kulichenko</span>
+  <span>Iana Kulichenko <span class="foot__alt" lang="ru">Яна Куличенко</span></span>
   <a href="https://github.com/iani-kuli" rel="noopener">github.com/iani-kuli</a>
 </footer>
 
