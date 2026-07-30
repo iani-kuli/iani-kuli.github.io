@@ -178,13 +178,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .portrait img{
   width:100%;height:100%;border:0;border-radius:0;object-fit:cover;
   filter:saturate(.92) contrast(1.02);
-  transition:transform .5s var(--ease),filter .4s var(--ease);
-}
-.portrait::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.10) 50%,transparent 62%);
-  transform:translateX(-120%);
-  transition:transform .8s var(--ease);
+  transition:transform .65s cubic-bezier(.2,.7,.2,1),filter .5s var(--ease);
 }
 
 /* ----------------------------------------------------------------- ribbon */
@@ -230,10 +224,19 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 /* --------------------------------------------------------------- sections */
 .section{max-width:var(--wrap);margin:0 auto;padding:clamp(44px,5vw,72px) 22px}
 .section__title{
+  position:relative;
   display:flex;align-items:baseline;gap:16px;
   padding-bottom:16px;margin-bottom:32px;border-bottom:1px solid var(--rule);
   font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-.032em;
 }
+/* the green rule under a heading draws itself when the section arrives */
+.section__title::after{
+  content:"";position:absolute;left:0;bottom:-1px;width:100%;height:1px;
+  background:linear-gradient(90deg,var(--signal),rgba(76,224,165,0) 62%);
+  transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .8s var(--ease) .08s;
+}
+.reveal.is-in .section__title::after{transform:scaleX(1)}
 .minor{
   font-family:var(--mono);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
   color:var(--signal);margin-bottom:20px;font-weight:500;
@@ -251,12 +254,14 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 
 /* ------------------------------------------------------------------ cards */
 .card,.proj,.paper,.ip,.talk{
+  position:relative;isolation:isolate;
   background:var(--surface);
   border:1px solid var(--rule);
   border-radius:14px;
   padding:22px;
   transition:border-color .2s var(--ease),background .2s var(--ease);
 }
+.card>*,.proj>*,.paper>*,.ip>*,.talk>*,.contrib>*{position:relative;z-index:1}
 .card h3,.proj h3{font-size:17.5px;font-weight:600;margin-bottom:9px;letter-spacing:-.02em}
 .card p,.proj p{margin:0;color:var(--paper-2);font-size:15px;line-height:1.48}
 
@@ -389,8 +394,18 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   .btn[data-link]:hover::after{opacity:1;transform:translate(-50%,0)}
   .btn[data-link]:hover::before{opacity:1;transform:translate(-50%,0) rotate(45deg)}
   .portrait:hover{border-color:rgba(76,224,165,.5);box-shadow:0 22px 60px rgba(76,224,165,.14)}
-  .portrait:hover img{transform:scale(1.05);filter:saturate(1) contrast(1.05)}
-  .portrait:hover::after{transform:translateX(120%)}
+  .portrait:hover img{transform:scale(1.06);filter:saturate(1) contrast(1.05)}
+
+  /* the card lights up under the cursor, --mx/--my come from app.js */
+  .card::after,.proj::after,.paper::after,.ip::after,.talk::after,.contrib::after{
+    content:"";position:absolute;inset:0;border-radius:inherit;z-index:0;
+    pointer-events:none;opacity:0;
+    background:radial-gradient(300px circle at var(--mx,50%) var(--my,0%),
+      rgba(76,224,165,.13),transparent 70%);
+    transition:opacity .3s var(--ease);
+  }
+  .card:hover::after,.proj:hover::after,.paper:hover::after,
+  .ip:hover::after,.talk:hover::after,.contrib:hover::after{opacity:1}
 }
 
 /* ----------------------------------------------------------------- reveal */
@@ -430,16 +445,26 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   *,*::before,*::after{animation:none !important;transition:none !important}
   .reveal,.reveal .card,.reveal .proj,.reveal .talk,.reveal .ip,
   .reveal .paper,.reveal .timeline li,.reveal .contrib{opacity:1;transform:none;filter:none}
+  .reveal .contrib__grid rect{opacity:1;transform:none}
+  .section__title::after{transform:scaleX(1)}
 }
 
 /* GitHub activity ------------------------------------------------------- */
 
 .contrib{
+  position:relative;isolation:isolate;
   background:var(--surface);
   border:1px solid var(--rule);
   border-radius:14px;
   padding:18px 18px 14px;
 }
+/* the calendar fills in as a wave, column by column, --d is set by the builder */
+.reveal .contrib__grid rect{
+  opacity:0;transform:scale(.55);transform-box:fill-box;transform-origin:center;
+  transition:opacity .3s var(--ease),transform .3s var(--ease);
+  transition-delay:calc(var(--d,0) * 9ms);
+}
+.reveal.is-in .contrib__grid rect{opacity:1;transform:none}
 .contrib__total{
   font-family:var(--mono);
   font-size:17px;

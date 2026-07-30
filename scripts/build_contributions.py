@@ -111,8 +111,9 @@ def render(total, days):
         x = PAD_LEFT + col * STEP
         y = PAD_TOP + row * STEP
         svg.append(
-            f'<rect class="c{level}" x="{x}" y="{y}" width="{CELL}" height="{CELL}" '
-            f'rx="2"><title>{day}: {count}</title></rect>'
+            f'<rect class="c{level}" style="--d:{col}" x="{x}" y="{y}" '
+            f'width="{CELL}" height="{CELL}" rx="2">'
+            f'<title>{day}: {count}</title></rect>'
         )
     svg.append("</svg>")
 
