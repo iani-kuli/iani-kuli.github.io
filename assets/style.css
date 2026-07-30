@@ -193,13 +193,9 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 /* --------------------------------------------------------------- sections */
 .section{max-width:var(--wrap);margin:0 auto;padding:clamp(44px,5vw,72px) 22px}
 .section__title{
-  display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  display:flex;align-items:baseline;gap:16px;
   padding-bottom:16px;margin-bottom:32px;border-bottom:1px solid var(--rule);
   font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-.032em;
-}
-.count{
-  font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.06em;
-  color:var(--paper-2);white-space:nowrap;
 }
 .minor{
   font-family:var(--mono);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
