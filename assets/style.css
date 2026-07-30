@@ -249,6 +249,43 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   white-space:nowrap;
 }
 
+/* patents ---------------------------------------------------------------- */
+.section__note{
+  margin:-22px 0 30px;
+  color:var(--text-2);
+  font-size:15.5px;
+  max-width:70ch;
+}
+.grid--ip{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.ip{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px;
+  transition:transform .26s var(--ease),border-color .26s var(--ease),background .26s var(--ease);
+}
+.ip--lead{
+  grid-column:1/-1;
+  background:linear-gradient(180deg,rgba(167,139,250,.07),rgba(167,139,250,0) 60%),var(--surface);
+  border-color:var(--line-hi);
+}
+.ip__kind{
+  display:inline-block;
+  margin-bottom:10px;
+  padding:3px 11px;
+  border:1px solid rgba(167,139,250,.32);
+  border-radius:999px;
+  font-size:12px;
+  letter-spacing:.06em;
+  color:var(--violet);
+}
+.ip h3{font-size:20px;font-weight:800;letter-spacing:.01em;margin-bottom:8px}
+.ip--lead h3{font-size:clamp(21px,2.4vw,26px)}
+.ip__title{margin:0 0 12px !important;color:var(--text) !important;font-size:16px !important;font-weight:600;max-width:74ch}
+.ip p{margin:0;color:var(--text-2);font-size:15.5px;max-width:80ch}
+
+.foot__alt{color:var(--text-2);opacity:.85;margin-left:10px}
+
 /* paper ------------------------------------------------------------------ */
 .paper{padding:32px}
 .paper__venue{margin:0 0 14px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
@@ -311,6 +348,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   .btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(45,212,191,.22)}
   .btn--ghost:hover{border-color:var(--teal);box-shadow:none;transform:translateY(-2px)}
   .card:hover,.proj:hover{transform:translateY(-4px);border-color:rgba(45,212,191,.42);background:var(--surface-hi)}
+  .ip:hover{transform:translateY(-3px);border-color:rgba(167,139,250,.42);background:var(--surface-hi)}
   .paper:hover{transform:none;border-color:var(--line);background:var(--surface)}
   .chips span:hover{border-color:var(--teal);color:var(--text)}
   .foot a:hover{color:var(--teal)}
