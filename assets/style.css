@@ -249,6 +249,61 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
   white-space:nowrap;
 }
 
+/* inline links ----------------------------------------------------------- */
+.ilink{
+  color:var(--teal);
+  border-bottom:1px solid rgba(45,212,191,.35);
+  transition:border-color .2s var(--ease)
+}
+
+/* stacks ----------------------------------------------------------------- */
+.stack{display:grid;gap:20px}
+.stack--tight{gap:12px}
+
+/* publications ----------------------------------------------------------- */
+.paper__ru{
+  margin:14px 0 0 !important;
+  padding-left:14px;
+  border-left:2px solid rgba(96,165,250,.35);
+  font-size:14px !important;
+  color:var(--text-2) !important;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 17px;
+  border:1px solid rgba(45,212,191,.28);
+  border-radius:999px;
+  font-size:13px;
+  color:var(--teal);
+}
+
+/* talks ------------------------------------------------------------------ */
+.talk{
+  display:grid;
+  grid-template-columns:190px minmax(0,1fr);
+  gap:18px;
+  padding:20px 24px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  transition:border-color .26s var(--ease),background .26s var(--ease);
+}
+.talk__when{
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:.07em;
+  color:var(--blue);
+  padding-top:3px;
+}
+.talk h3{font-size:17px;font-weight:700;margin-bottom:6px}
+.talk p{margin:0;color:var(--text-2);font-size:15px}
+.talk a{color:var(--teal);overflow-wrap:anywhere}
+@media (max-width:760px){
+  .talk{grid-template-columns:1fr;gap:7px}
+  .talk__when{padding-top:0}
+}
+
 /* patents ---------------------------------------------------------------- */
 .section__note{
   margin:-22px 0 30px;
@@ -294,6 +349,7 @@ main,.nav,.foot,.skip{position:relative;z-index:2}
 .paper__authors b{color:var(--text);font-weight:700}
 .paper p{color:var(--text-2);font-size:15.5px;max-width:76ch}
 .paper__links{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.paper__links .btn,.paper__links .pill{overflow-wrap:anywhere;max-width:100%}
 
 /* timeline --------------------------------------------------------------- */
 .timeline{list-style:none;margin:0;padding:0}
